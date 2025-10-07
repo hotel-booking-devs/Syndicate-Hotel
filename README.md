@@ -111,9 +111,11 @@ Software Syndicate
 Developed by **The Software Syndicate**
 University of the Western Cape
 Developers:
+```bash
 KGOTHATSO DLAMINI (4326970@myuwc.ac.za)
 JAPHTA THABO KUBEKA (4323640@myuwc.ac.za)
 DITEBOGO BOKHUTHO MOTSHABI (4366345@myuwc.ac.za)
 THILITSHI MUDZUNGWANE (4335400@myuwc.ac.za)
 UHONE MUKONDELELI (4366051@myuwc.ac.za)
 GENUWINE PHUNGO (4334893@myuwc.ac.za)
+```
