@@ -69,7 +69,7 @@ npx serve
 Configure payment keys
 In make-payment.html or related script:
 
-key: "YOUR_PAYSTACK_PUBLIC_KEY"
+key: "YOUR_PAYSTACK_PUBLIC_KEY"<br><br>
 
 💡 Customization
 
@@ -79,7 +79,7 @@ Replace hotel images inside /img/.
 
 Adjust booking logic or validation inside /script/ directory.
 
-Update metadata and SEO tags in each HTML file.
+Update metadata and SEO tags in each HTML file.<br><br>
 
 
 🧠 Tech Stack
@@ -88,7 +88,7 @@ Frontend: HTML5, CSS3, JavaScript
 
 Payment Gateway: Paystack
 
-Backend: PHP (for session and database integration)
+Backend: PHP (for session and database integration)<br><br>
 
 
 🔒 Security Notes
@@ -99,23 +99,23 @@ Always sanitize user input.
 
 Use HTTPS for payments and login.
 
-Never expose secret or private Paystack keys in client code.
+Never expose secret or private Paystack keys in client code.<br><br>
 
 📜 License
 
-This project is licensed under the MIT License — you are free to use, modify, and distribute it with attribution.
+This project is licensed under the MIT License — you are free to use, modify, and distribute it with attribution.<br><br>
 
 💬 Author
 
 Software Syndicate
-Developed by **The Software Syndicate**
-University of the Western Cape
-Developers:
-```bash
-KGOTHATSO DLAMINI (4326970@myuwc.ac.za)
-JAPHTA THABO KUBEKA (4323640@myuwc.ac.za)
-DITEBOGO BOKHUTHO MOTSHABI (4366345@myuwc.ac.za)
-THILITSHI MUDZUNGWANE (4335400@myuwc.ac.za)
-UHONE MUKONDELELI (4366051@myuwc.ac.za)
-GENUWINE PHUNGO (4334893@myuwc.ac.za)
-```
+Developed by **The Software Syndicate**<br>
+University of the Western Cape<br>
+Developers:<br>
+
+KGOTHATSO DLAMINI (4326970@myuwc.ac.za)<br>
+JAPHTA THABO KUBEKA (4323640@myuwc.ac.za)<br>
+DITEBOGO BOKHUTHO MOTSHABI (4366345@myuwc.ac.za)<br>
+THILITSHI MUDZUNGWANE (4335400@myuwc.ac.za)<br>
+UHONE MUKONDELELI (4366051@myuwc.ac.za)<br>
+GENUWINE PHUNGO (4334893@myuwc.ac.za)<br>
+
