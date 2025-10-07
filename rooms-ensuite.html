@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header{
+        position: fixed;
+        top:0;
+        right: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 10px 10px;
+        opacity: 1;
+        background-color: #00000096;
+        color: white;
+        z-index: 999;
+    }
+    header .start, .end{
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    header .center{
+        display: flex;
+        flex: 1;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .start a{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+
+    }
+
+    .center a, .end a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .center a:hover, .end a:hover {
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .center a:after, .end a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0066ff;
+        transition: width 0.3s ease;
+    }
+
+    .center a:hover:after, .end a:hover:after {
+        width: 100%;
+    }
+
+    /* GALLERY STYLES */
+    .gallery-hero {
+        height: 60vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        margin-top: 60px;
+    }
+
+    .gallery-hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .gallery-hero-content p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .gallery-filters {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin: 30px auto;
+        max-width: 1200px;
+    }
+    
+    .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .filter-group {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+    }
+    
+    .filter-group label {
+        margin-right: 8px;
+        font-weight: 500;
+    }
+    
+    .filter-group select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+    }
+
+    .rooms-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .gallery-item {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gallery-image {
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .gallery-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover .gallery-image img {
+        transform: scale(1.05);
+    }
+    
+    .room-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #ff6600;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        z-index: 2;
+    }
+    
+    .gallery-content {
+        padding: 20px;
+    }
+    
+    .room-title {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: #222;
+    }
+    
+    .room-price {
+        font-size: 1.5rem;
+        color: #0066cc;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .room-price span {
+        font-size: 1rem;
+        color: #666;
+        font-weight: 400;
+    }
+    
+    .room-features {
+        list-style: none;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .room-features li {
+        display: flex;
+        align-items: center;
+        background: #f5f5f5;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .room-features li i {
+        color: #0066cc;
+        margin-right: 5px;
+    }
+    
+    .room-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .room-rating {
+        color: #ffcc00;
+        font-weight: 500;
+    }
+
+    .btn {
+        display: inline-block;
+        background: #0066cc;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn:hover {
+        background: #0055aa;
+        transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+        background: transparent;
+        border: 2px solid #0066cc;
+        color: #0066cc;
+    }
+    
+    .btn-outline:hover {
+        background: #0066cc;
+        color: white;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding-top: 60px;
+    }
+    
+    .modal-content {
+        position: relative;
+        margin: auto;
+        padding: 0;
+        width: 90%;
+        max-width: 1200px;
+    }
+    
+    .modal-slide {
+        display: none;
+        text-align: center;
+    }
+    
+    .modal-slide img {
+        width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+    }
+    
+    .modal-caption {
+        margin: 15px auto;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        font-size: 1.2rem;
+    }
+    
+    .close {
+        color: white;
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: #999;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+    
+    .prev:hover, .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Room Detail View */
+    .room-detail {
+        display: none;
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        margin: 30px auto;
+        max-width: 1200px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+    
+    .detail-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .detail-gallery img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .detail-gallery img:hover {
+        transform: scale(1.05);
+    }
+    
+    .detail-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 30px;
+    }
+    
+    .detail-features {
+        list-style: none;
+    }
+    
+    .detail-features li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .detail-features li i {
+        color: #0066cc;
+        margin-right: 10px;
+        width: 20px;
+    }
+    
+    .detail-booking {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    
+    .back-to-gallery {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #0066cc;
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .back-to-gallery:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+        .detail-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .detail-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .gallery-hero-content h1 {
+            font-size: 2rem;
+        }
+        
+        .rooms-gallery {
+            grid-template-columns: 1fr;
+        }
+        
+        .filter-options {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .filter-group {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        
+        .filter-group select {
+            width: 100%;
+        }
+    }
+</style>
+
+<style>
+    /* Footer */
+    footer {
+        background: #2c3e50;
+        color: white;
+        padding: 60px 30px;
+        margin-top: 50px;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .footer-column h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background: #0066cc;
+    }
+    
+    .footer-column ul {
+        list-style: none;
+    }
+    
+    .footer-column ul li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-column ul li a {
+        color: #bbb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .footer-column ul li a:hover {
+        color: #0066cc;
+    }
+    
+    .footer-column p {
+        color: #bbb;
+        margin-bottom: 20px;
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .social-icons a {
+        color: white;
+        background: #333;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icons a:hover {
+        background: #0066cc;
+        transform: translateY(-3px);
+    }
+    
+    .copyright {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid #444;
+        color: #bbb;
+        font-size: 0.9rem;
+    }
+</style>
+
+<body>
+
+    <header>
+        <div class="start">
+            <img src="/img/photo-1584132915807-fd1f5fbc078f.avif" style="width: 30px; height: 30px;">
+            <a>The Software Syndicate</a>
+        </div>
+
+        <div class="center">
+            <a>Home</a>
+            <a href="rooms-ensuite.html">Rooms & Ensuite</a>
+        </div>
+
+        <div class="end">
+            <a>Contact</a>
+            <a>About Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="gallery-hero">
+        <div class="gallery-hero-content">
+            <h1>Our Luxurious Rooms</h1>
+            <p>Explore our collection of beautifully designed rooms and suites, each offering a unique experience of comfort and elegance.</p>
+        </div>
+    </div>
+
+    <div style="margin: 10px 30px;">
+        <!-- Filters Section -->
+        <section class="gallery-filters">
+            <h3>Filter Rooms:</h3>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="room-type">Room Type:</label>
+                    <select id="room-type">
+                        <option>All Rooms</option>
+                        <option>Standard</option>
+                        <option>Deluxe</option>
+                        <option>Suite</option>
+                        <option>Family</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-range">Price Range:</label>
+                    <select id="price-range">
+                        <option>Any Price</option>
+                        <option>Under R500</option>
+                        <option>R500 - R1000</option>
+                        <option>R1000 - R1500</option>
+                        <option>Over R1500</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="view-type">View:</label>
+                    <select id="view-type">
+                        <option>Any View</option>
+                        <option>Ocean View</option>
+                        <option>Garden View</option>
+                        <option>City View</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sort-by">Sort By:</label>
+                    <select id="sort-by">
+                        <option>Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Rating</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Room Detail View (Initially Hidden) -->
+        <div id="room-detail" class="room-detail">
+            <a class="back-to-gallery" onclick="hideRoomDetail()"><i class="fas fa-arrow-left"></i> Back to Gallery</a>
+            <div class="detail-header">
+                <h2 id="detail-title">Deluxe King Room</h2>
+                <p id="detail-price" class="room-price">R599 <span>/ day</span></p>
+            </div>
+            
+            <div class="detail-gallery" id="detail-gallery">
+                <!-- Images will be populated by JavaScript -->
+            </div>
+            
+            <div class="detail-content">
+                <div>
+                    <h3>Description</h3>
+                    <p id="detail-description">Our Deluxe King Room offers a perfect blend of comfort and luxury. Featuring a king-size bed, modern amenities, and elegant decor, this room is designed for those who appreciate the finer things in life.</p>
+                    
+                    <h3>Features & Amenities</h3>
+                    <ul class="detail-features" id="detail-features">
+                        <!-- Features will be populated by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="detail-booking">
+                    <h3>Book This Room</h3>
+                    <p>Check availability and reserve your stay</p>
+                    <a href="/booking-check-out.html" class="btn" style="width: 100%; text-align: center; margin-top: 15px;">Book Now</a>
+                    <div class="room-rating" id="detail-rating" style="margin-top: 15px;">
+                        <!-- Rating will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rooms Gallery -->
+        <div class="rooms-grid" id="rooms-gallery">
+            <!-- Room items will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="modal-slide">
+                <img src="" id="modal-image">
+                <div class="modal-caption" id="modal-caption"></div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>The Software Syndicate</h3>
+                    <p>Experience the epitome of luxury and comfort at our exquisite hotel.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Rooms & Suites</a></li>
+                        <li><a href="#">Dining</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 7535 Bellvile, UWC</li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@thesoftwaresyndicate.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 The Software Syndicate Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Room data
+        const rooms = [
+            {
+                id: 1,
+                title: "Deluxe King Room",
+                price: 599,
+                images: [
+                    "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Deluxe",
+                view: "City View",
+                rating: 4.5,
+                reviews: 128,
+                badge: "Popular",
+                features: [
+                    "King-size bed",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Coffee maker",
+                    "Air conditioning",
+                    "Work desk",
+                    "Mini fridge"
+                ],
+                description: "Our Deluxe King Room offers a perfect blend of comfort and luxury. Featuring a king-size bed, modern amenities, and elegant decor, this room is designed for those who appreciate the finer things in life."
+            },
+            {
+                id: 2,
+                title: "Executive Suite",
+                price: 899,
+                images: [
+                    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Suite",
+                view: "City View",
+                rating: 4.9,
+                reviews: 87,
+                badge: "Best Value",
+                features: [
+                    "King-size bed",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Luxury bathroom",
+                    "Separate living area",
+                    "Mini bar",
+                    "Jacuzzi"
+                ],
+                description: "The Executive Suite provides spacious luxury with separate living and sleeping areas. Perfect for business travelers or those seeking extra space and premium amenities."
+            },
+            {
+                id: 3,
+                title: "Presidential Suite",
+                price: 1299,
+                images: [
+                    "https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1560448076-3f6f44b6b4a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1551516594-56cb78394645?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Suite",
+                view: "City View",
+                rating: 5.0,
+                reviews: 42,
+                badge: "Luxury",
+                features: [
+                    "King-size bed",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Jacuzzi",
+                    "Dining area",
+                    "Private bar",
+                    "Butler service"
+                ],
+                description: "The ultimate in luxury accommodation, our Presidential Suite offers unparalleled comfort and sophistication with premium amenities and exclusive services."
+            },
+            {
+                id: 4,
+                title: "Standard Twin Room",
+                price: 349,
+                images: [
+                    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Standard",
+                view: "Garden View",
+                rating: 4.2,
+                reviews: 203,
+                badge: "",
+                features: [
+                    "Two double beds",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Coffee maker",
+                    "Air conditioning",
+                    "Work desk"
+                ],
+                description: "Our Standard Twin Room provides comfortable accommodation with all the essential amenities for a pleasant stay at an affordable price."
+            },
+            {
+                id: 5,
+                title: "Family Suite",
+                price: 749,
+                images: [
+                    "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1560448076-3f6f44b6b4a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1551516594-56cb78394645?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Family",
+                view: "Garden View",
+                rating: 4.7,
+                reviews: 96,
+                badge: "Family Friendly",
+                features: [
+                    "King bed + bunk beds",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Game console",
+                    "Kitchenette",
+                    "Children's amenities"
+                ],
+                description: "Designed with families in mind, our Family Suite offers spacious accommodation with special amenities for children and a separate area for parents."
+            },
+            {
+                id: 6,
+                title: "Ocean View Room",
+                price: 989,
+                images: [
+                    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1414872785488-7620a2ae1764?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80",
+                    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                ],
+                type: "Deluxe",
+                view: "Ocean View",
+                rating: 4.8,
+                reviews: 112,
+                badge: "Ocean View",
+                features: [
+                    "King-size bed",
+                    "Free WiFi",
+                    "Smart TV",
+                    "Beach access",
+                    "Ocean view balcony",
+                    "Mini bar"
+                ],
+                description: "Wake up to breathtaking ocean views in our Ocean View Room. This beautifully appointed room features a private balcony overlooking the sea."
+            }
+        ];
+
+        // Initialize the gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            renderGallery();
+            setupFilters();
+        });
+
+        // Render the room gallery
+        function renderGallery(filteredRooms = rooms) {
+            const galleryContainer = document.getElementById('rooms-gallery');
+            galleryContainer.innerHTML = '';
+            
+            filteredRooms.forEach(room => {
+                const roomElement = document.createElement('div');
+                roomElement.className = 'gallery-item';
+                roomElement.innerHTML = `
+                    <div class="gallery-image">
+                        <img src="${room.images[0]}" alt="${room.title}">
+                        ${room.badge ? `<div class="room-badge">${room.badge}</div>` : ''}
+                    </div>
+                    <div class="gallery-content">
+                        <h3 class="room-title">${room.title}</h3>
+                        <p class="room-price">R${room.price} <span>/ day</span></p>
+                        <ul class="room-features">
+                            ${room.features.slice(0, 3).map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                        </ul>
+                        <div class="room-actions">
+                            <div class="room-rating">
+                                ${generateStarRating(room.rating)} <span>${room.rating} (${room.reviews} reviews)</span>
+                            </div>
+                            <button class="btn-outline" onclick="viewRoomDetail(${room.id})">View Details</button>
+                        </div>
+                    </div>
+                `;
+                galleryContainer.appendChild(roomElement);
+            });
+        }
+
+        // Generate star rating HTML
+        function generateStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Set up filter functionality
+        function setupFilters() {
+            const roomTypeFilter = document.getElementById('room-type');
+            const priceFilter = document.getElementById('price-range');
+            const viewFilter = document.getElementById('view-type');
+            const sortFilter = document.getElementById('sort-by');
+            
+            const filters = [roomTypeFilter, priceFilter, viewFilter, sortFilter];
+            
+            filters.forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+        }
+
+        // Apply filters to the gallery
+        function applyFilters() {
+            const roomType = document.getElementById('room-type').value;
+            const priceRange = document.getElementById('price-range').value;
+            const viewType = document.getElementById('view-type').value;
+            const sortBy = document.getElementById('sort-by').value;
+            
+            let filteredRooms = rooms.filter(room => {
+                // Filter by room type
+                if (roomType !== 'All Rooms' && room.type !== roomType) return false;
+                
+                // Filter by view type
+                if (viewType !== 'Any View' && room.view !== viewType) return false;
+                
+                // Filter by price range
+                if (priceRange !== 'Any Price') {
+                    if (priceRange === 'Under R500' && room.price >= 500) return false;
+                    if (priceRange === 'R500 - R1000' && (room.price < 500 || room.price > 1000)) return false;
+                    if (priceRange === 'R1000 - R1500' && (room.price < 1000 || room.price > 1500)) return false;
+                    if (priceRange === 'Over R1500' && room.price <= 1500) return false;
+                }
+                
+                return true;
+            });
+            
+            // Sort the results
+            if (sortBy === 'Price: Low to High') {
+                filteredRooms.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'Price: High to Low') {
+                filteredRooms.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'Rating') {
+                filteredRooms.sort((a, b) => b.rating - a.rating);
+            }
+            
+            renderGallery(filteredRooms);
+        }
+
+        // View room details
+        function viewRoomDetail(roomId) {
+            const room = rooms.find(r => r.id === roomId);
+            if (!room) return;
+            
+            // Populate room details
+            document.getElementById('detail-title').textContent = room.title;
+            document.getElementById('detail-price').innerHTML = `R${room.price} <span>/ day</span>`;
+            document.getElementById('detail-description').textContent = room.description;
+            
+            // Populate features
+            const featuresContainer = document.getElementById('detail-features');
+            featuresContainer.innerHTML = '';
+            room.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check"></i> ${feature}`;
+                featuresContainer.appendChild(li);
+            });
+            
+            // Populate rating
+            document.getElementById('detail-rating').innerHTML = `
+                ${generateStarRating(room.rating)} <span>${room.rating} (${room.reviews} reviews)</span>
+            `;
+            
+            // Populate gallery
+            const galleryContainer = document.getElementById('detail-gallery');
+            galleryContainer.innerHTML = '';
+            room.images.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${room.title} - Image ${index + 1}`;
+                img.onclick = () => openModal(room, index);
+                galleryContainer.appendChild(img);
+            });
+            
+            // Show the detail view and hide the gallery
+            document.getElementById('room-detail').style.display = 'block';
+            document.getElementById('rooms-gallery').style.display = 'none';
+            document.querySelector('.gallery-filters').style.display = 'none';
+            
+            // Scroll to top of detail view
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hide room detail and show gallery
+        function hideRoomDetail() {
+            document.getElementById('room-detail').style.display = 'none';
+            document.getElementById('rooms-gallery').style.display = 'grid';
+            document.querySelector('.gallery-filters').style.display = 'block';
+        }
+
+        // Modal functionality for image viewing
+        let currentRoom = null;
+        let currentSlideIndex = 0;
+
+        function openModal(room, index) {
+            currentRoom = room;
+            currentSlideIndex = index;
+            document.getElementById('image-modal').style.display = 'block';
+            showSlide(index);
+        }
+
+        function closeModal() {
+            document.getElementById('image-modal').style.display = 'none';
+        }
+
+        function plusSlides(n) {
+            showSlide(currentSlideIndex + n);
+        }
+
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('modal-slide');
+            if (n >= currentRoom.images.length) {
+                currentSlideIndex = 0;
+            } else if (n < 0) {
+                currentSlideIndex = currentRoom.images.length - 1;
+            } else {
+                currentSlideIndex = n;
+            }
+            
+            document.getElementById('modal-image').src = currentRoom.images[currentSlideIndex];
+            document.getElementById('modal-caption').textContent = `${currentRoom.title} - Image ${currentSlideIndex + 1}`;
+        }
+
+        // Close modal when clicking outside of image
+        window.onclick = function(event) {
+            const modal = document.getElementById('image-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>

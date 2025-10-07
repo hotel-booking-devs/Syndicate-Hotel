@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/hstyle.css">
+        <link rel="stylsheet" href="css/style.css">
+        <title>Syndicate Hotel</title>
+        
+    </head>
+
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        header{
+            position: fixed;
+            top:0;
+            right: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 10px 10px;
+            opacity: 1;
+            background-color: #000000b0;
+            color: white;
+            z-index: 999;
+        }
+        header .start, .end{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        header .center{
+            display: flex;
+            flex: 1;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .start a{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+
+        }
+
+        .center a, .end a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .center a:hover, .end a:hover {
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .center a:after, .end a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #0066ff;
+            transition: width 0.3s ease;
+        }
+
+        .center a:hover:after, .end a:hover:after {
+            width: 100%;
+        }
+
+    </style>
+
+    <body>
+
+        <header>
+            <div class="start">
+                <img src="/img/photo-1584132915807-fd1f5fbc078f.avif" style="width: 30px; height: 30px;">
+                <a>Syndicate Hotel</a>
+            </div>
+
+            <div class="center">
+                <a>Home</a>
+                <a href="rooms-ensuite.html">Rooms & Ensuite</a>
+                <a>Contact</a>
+                <a>About Us</a>
+            </div>
+
+            <div class="end">
+                <a id="login" class="h_link" href="login.html">Log in</a>
+                <a id="login" class="h_link" href="signup.html" style="background-color: #ffffff; color: black;">Sign Up</a>
+            </div>
+            
+
+        </header>
+
+        <div id="home">
+            <div style=" width: fit-content; min-width: 300px; border-radius: 30px; margin-left: 50px; margin-top: 50px; padding: 10px 50px; background-color: rgba(0, 0, 0, 0.137); backdrop-filter: blur(5px);">
+                <h2 id="sl">Find your perfect stay</h2>
+                <p id="sl1">Rooms designed for your comfort.....</p>
+            </div>
+                
+            <div id="selection">
+                <label >Check in: <input id="checkin" type="date"></label>
+                <label >Check out: <input id="checkout" type="date"></label>
+
+                <label id="guests_no">Guests: 
+                    <select name="" id="guests_number">
+                        <option value="">1 Guest </option>
+                        <option value="">2 Guests </option>
+                        <option value="">3 Guests </option>
+                        <option value="">4 Guests </option>
+                        <option value="">5 Guests </option>
+                    </select>
+                </label>
+
+                <!--  -->
+                <label id="_rooms_no">Rooms:
+                     <select name="" id="rooms_number">
+                        <option value="">1 Room </option>
+                        <option value="">2 Rooms </option>
+                        <option value="">3 Rooms </option>
+                    </select>
+                
+                </label>
+
+
+                <label><a  id="book" class="h_link" href="booking.html">Book now</a></label>  
+            </div>
+            
+        </div>
+        <div class="about">
+            <div class="about1">
+                <h3>Why Choose Us</h3>
+                <p>Discover what makes Software Syndicate the perfect choice for your next gateway</p>
+            </div> 
+            <div class="info">
+                <div class="info_">
+                    <h4> Prime location</h4>
+                    <p>Cetrally located with easy access to the city's main attractions and business districts</p>
+                </div>
+                <div class="info_">
+                    <h4> Fine Dining</h4>
+                    <p>Experience culinary excellence at our award-winning resturants and bars </p>
+                </div>
+                <div class="info_">
+                    <h4> Spa & Wellness</h4>
+                    <p>Relax and rejuvenate at our world-class spa and fitness center </p>
+                </div>
+                <div class="info_">
+                    <h4> Personalized Service</h4>
+                    <p>Our dedicated staff is committed to providing exceptional service tailored to your needs</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about2">
+            <div class="about3">
+                <h3>Our Rooms & Suites</h3>
+                <p>Discover what makes Syndicate Hotel the perfect choice for your next gateway</p>
+            </div> 
+            <div class="info2">
+                <div class="room_card">
+                    <div class="pic">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Deluxe Room">  
+                    </div>
+                    <div class="room_info">
+                        <h3> Starndard Room</h3>
+                        <p class="room_price">R1,099 / night </p>
+                        <ul>
+                            <li><i class="room_pr"></i> King-size bed</li>
+                            <li><i class="room_pr"></i> Free WiFi</li>
+                            <li><i class="room_pr"></i> Smart TV</li>
+                            <li><i class="room_pr"></i> Coffee maker</li>
+                            <li><i class="room_pr"></i> Air conditioning</li>
+                        
+                        </ul>
+                       
+                    </div>
+                </div>
+                <div class="room_card">
+                    <div class="pic">
+                        <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Presidential Suite">
+                    </div>
+                    <div class="room_info">
+                        <h3> Deluxe Room</h3>
+                        <p class="room_price">R1,499 / night</p>
+                        <ul>
+                            <li><i class="room_pr"></i> King-size bed</li>
+                            <li><i class="room_pr"></i> Free WiFi</li>
+                            <li><i class="room_pr"></i> Smart TV</li>
+                            <li><i class="room_pr"></i> Jacuzzi</li>
+                            <li><i class="room_pr"></i> Dining area</li>
+                        
+                        </ul>
+                       
+                    </div>
+                </div>
+                <div class="room_card">
+                    <div class="pic">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Executive Suite">
+                    </div>
+                    <div class="room_info">
+                        <h3>Executive Suite</h3>
+                        <p class="room_price">R1,999 / night</p>
+                       
+                        <ul>
+                            <li><i class="room_pr"></i> King-size bed</li>
+                            <li><i class="room_pr"></i> Free WiFi</li>
+                            <li><i class="room_pr"></i> Smart TV</li>
+                            <li><i class="room_pr"></i> Luxurious bathroom</li>
+                            <li><i class="room_pr"></i> Separate living area</li>
+                        
+                        </ul>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Syndicate Hotel</h3>
+                    <p>Experience the epitome of luxury and comfort at our exquisite hotel.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Rooms & Suites</a></li>
+                        <li><a href="#">Dining</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 7535 Bellvile, UWC</li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@thesoftwaresyndicate.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Syndicate Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+        <script src="home.js"></script>
+    </body>
+
+</html>

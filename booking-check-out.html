@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylsheet" href="css/style.css">
+</head>
+
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    header{
+        position: fixed;
+        top:0;
+        right: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 10px 10px;
+        opacity: 1;
+        background-color: #000000bd;
+        color: white;
+        z-index: 999;
+    }
+    header .start, .end{
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    header .center{
+        display: flex;
+        flex: 1;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .start a{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: bold;
+
+    }
+
+    .center a, .end a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 0.8rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .center a:hover, .end a:hover {
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .center a:after, .end a:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0066ff;
+        transition: width 0.3s ease;
+    }
+
+    .center a:hover:after, .end a:hover:after {
+        width: 100%;
+    }
+
+</style>
+
+<style>
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: #0066cc;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #0066cc;
+        }
+        
+        .footer-column p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: #0066cc;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+        
+       
+    
+</style>
+
+    <style>
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: #444;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .back-btn {
+            background: #833214e7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #cf6b46e7;
+        }
+        
+        .room-details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .room-details-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .image-carousel {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .carousel-main {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-thumbnails {
+            display: flex;
+            padding: 15px;
+            gap: 10px;
+            overflow-x: auto;
+        }
+        
+        .carousel-thumb {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .carousel-thumb:hover, .carousel-thumb.active {
+            opacity: 1;
+        }
+        
+        .carousel-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .room-info {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .room-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .room-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #833214e7;
+            margin-bottom: 20px;
+        }
+        
+        .room-description {
+            color: #445069;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .room-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature i {
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .booking-form-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #ff6b6b;
+            border-radius: 2px;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #445069;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 80%;
+            padding: 14px;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #0066ff;
+            outline: none;
+        }
+        
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+        
+        .payment-btn {
+            background: linear-gradient(90deg, #ff6b6b 0%, #833214e7 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            grid-column: 1 / -1;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .payment-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        
+        .carousel-control:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .carousel-prev {
+            left: 15px;
+        }
+        
+        .carousel-next {
+            right: 15px;
+        }
+        
+        /* Reviews Section */
+        .reviews-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .review-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #0066ff;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .reviewer-info {
+            flex: 1;
+        }
+        
+        .reviewer-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .review-date {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .review-rating {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+        
+        .review-content {
+            color: #34495e;
+            line-height: 1.6;
+        }
+        
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: ltr;
+            text-align: center;
+        }
+        
+        .rating span {
+            display: inline-block;
+            position: relative;
+            width: 1.1em;
+            color: #ffc107;
+        }
+    </style>
+
+<body>
+
+    <header>
+        <div class="start">
+            <img src="/img/photo-1584132915807-fd1f5fbc078f.avif" style="width: 30px; height: 30px;">
+            <a>Syndicate Hotel</a>
+        </div>
+
+        <div class="center">
+            <a>Home</a>
+            <a href="rooms-ensuite.html">Rooms & Ensuite</a>
+        </div>
+
+        <div class="end">
+            <a>Contact</a>
+            <a>About Us</a>
+        </div>
+
+    </header>
+
+    
+
+<div style="margin: 60px 30px;">
+    <!-- Main Content -->
+    
+    <div class="container">
+        <div class="header2">
+            <div class="logo">
+                <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=200&q=80" alt="Hotel Logo">
+                <span>Luxury Stays</span>
+            </div>
+            <a href="javascript:void(0);" onclick="window.history.back();" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Rooms
+            </a>
+        </div>
+        
+        <div class="room-details-container">
+            <div class="image-carousel">
+                <div class="carousel-main">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80" alt="Executive Suite" id="main-image">
+                    <div class="carousel-control carousel-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="carousel-control carousel-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="carousel-thumbnails">
+                    <div class="carousel-thumb active" data-image="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=150&q=80" alt="Suite Image 1">
+                    </div>
+                    <div class="carousel-thumb" data-image="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80">
+                        <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=150&q=80" alt="Suite Image 2">
+                    </div>
+                    <div class="carousel-thumb" data-image="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=150&q=80" alt="Suite Image 3">
+                    </div>
+                    <div class="carousel-thumb" data-image="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80">
+                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=150&q=80" alt="Suite Image 4">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="room-info">
+                <h2 class="room-title">Executive Suite</h2>
+                <p class="room-price">R599 <span>/night</span></p>
+                <p class="room-description">
+                    Experience unparalleled luxury in our Executive Suite. This spacious suite features a separate living area, premium amenities, and stunning views. Perfect for business travelers or those seeking an extra touch of luxury during their stay.
+                </p>
+                
+                <h3 class="section-title">Room Features</h3>
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Up to 4 guests</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>1 King bed + 1 Sofa bed</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-ruler-combined"></i>
+                        <span>650 sq. ft.</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-wifi"></i>
+                        <span>High-speed WiFi</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-tv"></i>
+                        <span>55" Smart TV</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-snowflake"></i>
+                        <span>Climate control</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-coffee"></i>
+                        <span>Mini bar</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-hot-tub"></i>
+                        <span>Jacuzzi</span>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Amenities</h3>
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-shower"></i>
+                        <span>Premium toiletries</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-utensils"></i>
+                        <span>Room service</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-parking"></i>
+                        <span>Free parking</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Pool access</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Fitness center</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Concierge service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reviews Section -->
+        <div class="reviews-container">
+            <h2 class="section-title">Guest Reviews</h2>
+            
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Johnson" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Sarah Johnson</div>
+                            <div class="review-date">March 15, 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <div class="rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>Absolutely loved our stay in the Executive Suite! The room was spacious, clean, and had an amazing view. The jacuzzi was the highlight of our stay. Will definitely be returning!</p>
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Michael Chen</div>
+                            <div class="review-date">April 5, 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <div class="rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>Great suite for business travel. The separate living area was perfect for meetings, and the high-speed WiFi was reliable. Room service was prompt and the food was excellent.</p>
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jessica Williams" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">Jessica Williams</div>
+                            <div class="review-date">May 22, 2023</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">
+                        <div class="rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>We celebrated our anniversary here and it was perfect! The staff left a complimentary bottle of champagne in our room. The bed was incredibly comfortable, and the city views at night were breathtaking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="booking-form-container">
+            <h2 class="section-title">Book Your Stay</h2>
+            
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="check-in">Check-in Date</label>
+                    <input type="date" id="check-in" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="check-out">Check-out Date</label>
+                    <input type="date" id="check-out" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <select id="guests" >
+                        <option value="1">1 Guest</option>
+                        <option value="2" selected>2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rooms">Number of Rooms</label>
+                    <select id="rooms" >
+                        <option value="1" selected>1 Room</option>
+                        <option value="2">2 Rooms</option>
+                        <option value="3">3 Rooms</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" >
+                </div>
+                
+                <div class="form-group form-group-full">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="zip">ZIP Code</label>
+                    <input type="text" id="zip" >
+                </div>
+                
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" >
+                        <option value="">Select Country</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                        <option value="au">Australia</option>
+                    </select>
+                </div>
+                
+                <div class="form-group form-group-full">
+                    <label for="special-requests">Special Requests</label>
+                    <textarea id="special-requests" rows="3"></textarea>
+                </div>
+                
+                <a type="submit" class="payment-btn" href="make-payment.html">
+                    <i class="fas fa-lock"></i> Make Payment
+                </a>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // Image Carousel Functionality
+        const mainImage = document.getElementById('main-image');
+        const thumbnails = document.querySelectorAll('.carousel-thumb');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        
+        let currentImageIndex = 0;
+        const images = [
+            'https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80',
+            'https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80',
+            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80',
+            'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=600&q=80'
+        ];
+        
+        // Set up thumbnail clicks
+        thumbnails.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                mainImage.src = thumb.getAttribute('data-image');
+                
+                // Update active thumbnail
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                
+                currentImageIndex = index;
+            });
+        });
+        
+        // Previous button functionality
+        prevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateMainImage();
+        });
+        
+        // Next button functionality
+        nextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateMainImage();
+        });
+        
+        function updateMainImage() {
+            mainImage.src = images[currentImageIndex];
+            
+            // Update active thumbnail
+            thumbnails.forEach((thumb, index) => {
+                if (index === currentImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+        
+        // Set minimum date for check-in to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('check-in').setAttribute('min', today);
+        
+        // Set minimum date for check-out to check-in date
+        document.getElementById('check-in').addEventListener('change', function() {
+            const checkInDate = this.value;
+            document.getElementById('check-out').setAttribute('min', checkInDate);
+        });
+        
+        // Form submission
+        document.querySelector('.booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Redirecting to payment gateway...');
+            // In a real application, this would redirect to a payment page
+        });
+        
+        // Initialize with tomorrow's date as check-out
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+        document.getElementById('check-out').setAttribute('min', tomorrowFormatted);
+    </script>
+
+
+</div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Syndicate Hotel</h3>
+                    <p>Experience the epitome of luxury and comfort at our exquisite hotel.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Rooms & Suites</a></li>
+                        <li><a href="#">Dining</a></li>
+                        <li><a href="#">Spa & Wellness</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 7535 Bellvile, UWC</li>
+                        <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@thesoftwaresyndicate.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers</p>
+                    <form>
+                        <input type="email" placeholder="Your Email" style="padding: 10px; width: 100%; margin-bottom: 10px; border-radius: 4px; border: none;">
+                        <button type="submit" class="btn" style="width: 100%;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Syndicate Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+    
+
+</body>
+</html>

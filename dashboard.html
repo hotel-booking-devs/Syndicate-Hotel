@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Syndicate Hotel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #833214;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+            --text-dark: #333;
+            --text-light: #777;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 30px;
+            background-color: var(--dark-bg);
+            color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        header .start, .end {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header .center {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .start a {
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .center a, .end a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .center a:hover, .end a:hover {
+            color: var(--white);
+            cursor: pointer;
+        }
+        
+        .center a:after, .end a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .center a:hover:after, .end a:hover:after {
+            width: 100%;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            position: fixed;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: rgba(0, 102, 204, 0.1);
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .sidebar-menu i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 30px;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-bg));
+            color: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .welcome-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 204, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .card-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Upcoming Bookings */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .booking-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            display: flex;
+        }
+        
+        .booking-image {
+            width: 250px;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .booking-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .booking-card:hover .booking-image img {
+            transform: scale(1.05);
+        }
+        
+        .booking-details {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .booking-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+        }
+        
+        .booking-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+        
+        .status-pending {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #FF9800;
+        }
+        
+        .booking-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-item i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .booking-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0055aa;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .main-content {
+                margin-left: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .booking-card {
+                flex-direction: column;
+            }
+            
+            .booking-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .center {
+                margin: 10px 0;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="start">
+            <img src="/img/photo-1584132915807-fd1f5fbc078f.avif" style="width: 30px; height: 30px;">
+            <a>Syndicate Hotel</a>
+        </div>
+
+        <div class="center">
+            <a>Home</a>
+            <a href="rooms-ensuite.html">Rooms & Ensuite</a>
+        </div>
+
+        <div class="end">
+            <a>Contact</a>
+            <a>About Us</a>
+            <div class="user-profile">
+                <div class="user-avatar">JS</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-calendar-alt"></i> My Bookings</a></li>
+                <li><a href="#"><i class="fas fa-credit-card"></i> Payments</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <h1>Welcome back, John!</h1>
+                <p>We're glad to see you again. Here's what's happening with your bookings.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upcoming Stays</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">2</div>
+                    <p class="card-text">You have 2 upcoming reservations</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Reward Points</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">4,250</div>
+                    <p class="card-text">Enough for a free night stay</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Wishlist</h3>
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="card-value">3</div>
+                    <p class="card-text">Rooms you're interested in</p>
+                </div>
+            </div>
+
+            <!-- Upcoming Bookings Section -->
+            <h2 class="section-title">Upcoming Bookings</h2>
+
+            <!-- Booking 1 -->
+            <div class="booking-card">
+                <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Deluxe Room">
+                </div>
+                <div class="booking-details">
+                    <div class="booking-header">
+                        <h3 class="booking-title">Deluxe King Room</h3>
+                        <span class="booking-status status-confirmed">Confirmed</span>
+                    </div>
+                    <div class="booking-info">
+                        <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>June 15 - June 18, 2023</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Adults</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-bed"></i>
+                            <span>1 King Bed</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>R599 / night</span>
+                        </div>
+                    </div>
+                    <div class="booking-actions">
+                        <a href="#" class="btn btn-primary">View Details</a>
+                        <a href="#" class="btn btn-outline">Modify Booking</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking 2 -->
+            <div class="booking-card">
+                <div class="booking-image">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Family Room">
+                </div>
+                <div class="booking-details">
+                    <div class="booking-header">
+                        <h3 class="booking-title">Family Suite</h3>
+                        <span class="booking-status status-pending">Pending Payment</span>
+                    </div>
+                    <div class="booking-info">
+                        <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>July 22 - July 28, 2023</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Adults, 2 Children</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-bed"></i>
+                            <span>King bed + bunk beds</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>R549 / night</span>
+                        </div>
+                    </div>
+                    <div class="booking-actions">
+                        <a href="#" class="btn btn-primary">Complete Payment</a>
+                        <a href="#" class="btn btn-outline">Cancel Booking</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <h2 class="section-title" style="margin-top: 40px;">Recent Activity</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Your Activity</h3>
+                </div>
+                <div style="padding: 10px 0;">
+                    <div style="display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <div style="background: rgba(0, 102, 204, 0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-calendar-check" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight: 500;">You booked the Deluxe King Room</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">June 1, 2023 at 10:30 AM</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <div style="background: rgba(0, 102, 204, 0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-star" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight: 500;">You reviewed your stay at Syndicate Hotel</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">May 28, 2023 at 4:15 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; padding: 10px 0;">
+                        <div style="background: rgba(0, 102, 204, 0.1); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                            <i class="fas fa-heart" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div>
+                            <p style="font-weight: 500;">You added Ocean View Room to your wishlist</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">May 20, 2023 at 9:45 AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set the minimum date for check-in to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            
+            // Set user's first initial and last initial for avatar
+            const userAvatar = document.querySelector('.user-avatar');
+            const userName = "John Smith"; // This would come from your authentication system
+            const initials = userName.split(' ').map(name => name[0]).join('');
+            userAvatar.textContent = initials;
+            
+            // Active class to clicked sidebar items
+            const sidebarItems = document.querySelectorAll('.sidebar-menu a');
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sidebarItems.forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
