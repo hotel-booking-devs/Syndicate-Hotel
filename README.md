@@ -45,6 +45,10 @@ It allows users to browse rooms, make reservations, and complete secure payments
 
 ---
 
+![Booking page preview](img/booking-preview.png)
+*Figure: Booking page layout in Software Syndicate.*
+<br><br>
+
 ## ⚙️ Setup & Usage
 
 1. **Clone this repository**
