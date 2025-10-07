@@ -111,7 +111,7 @@ This project is licensed under the MIT License — you are free to use, modify, 
 
 💬 Author
 
-Software Syndicate
+Software Syndicate<br>
 Developed by **The Software Syndicate**<br>
 University of the Western Cape<br>
 Developers:<br>
