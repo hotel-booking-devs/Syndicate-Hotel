@@ -1,0 +1,328 @@
+#bar{
+   position: fixed;
+   top: 0;
+   left: 0;
+   height:70px;  
+   width: 100vw;
+   background-color: rgba(20, 20, 20, 0.7);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   z-index: 500;
+   margin-bottom: 0px;
+
+}
+#login{
+    display: inline-block;
+    margin-right:20px;
+    border: 1px solid black;
+    width: fit-content;
+    padding: 5px 30px;
+    border-radius: 50px;
+    background-color: rgb(73, 43, 43); 
+    text-decoration: none;
+    text-align: center;
+    line-height: 5vh;
+    color: white;
+}
+#login:hover{
+    background-color:rgb(163, 121, 121) ;
+
+}
+body{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+#name{
+    margin-left:20px ;
+    font-size: xxx-large;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(95, 22, 9, 0.788);
+}
+#home{
+   margin-top: -30px;
+   padding-bottom: 30px;
+   padding-top: 60px;
+   min-height:450px;
+   width: 100vw;
+   background: url("/img/vojtech-bruzek-Yrxr3bsPdS0-unsplash.jpg")  no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+#sl{
+    margin-left:5%;
+    font-size: xx-large;
+    white-space: nowrap;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#sl1{
+    margin-left:5%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#selection{
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    background-color: white;
+    border-radius: 100px;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+#selection label{
+    padding-left: 10px;
+}
+.h_link:hover{
+
+    background-color:rgb(163, 121, 121) ;
+    
+}
+#book{
+    display: inline-block;
+    width: fit-content;
+    margin-right:5px;
+    padding: 5px 20px;
+    border: 1px solid black;
+    border-radius: 50px;
+    background-color: rgb(73, 43, 43); 
+    text-decoration: none;
+    text-align: center;
+    line-height: 5vh;
+    color: aliceblue;
+}
+#book:hover{
+    background-color:rgb(163, 121, 121) ;
+
+}
+.about{
+    height: 300px;
+    background-color: white;
+}
+.about1{
+   height: 30%; 
+   margin-top: 2%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+}
+.about1 h3{
+    margin: auto;
+    font-size: xx-large;
+    font-weight: 300;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.about1 p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(73, 73, 73);
+}
+.info{
+    margin-left: 10px;
+    border: 1px double black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60%;
+    padding: 10px;
+    width: 80vw;
+    margin: 20px auto;
+}
+.info_{
+    margin-left: 10px;
+    width: 15vw;
+    
+}
+.info_ p{
+    color: rgb(73, 73, 73);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.info_ h4{
+    margin-top: 5px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
+}
+
+.about2{
+    height: 700px;
+    background-color: rgb(233, 233, 233);
+    padding: 0;
+    margin: 0;
+
+}
+.about3{
+   height: 15%; 
+   margin-top: 2%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom:10px;  
+}
+.about3 h3{
+    margin: 20px auto;
+    font-size: xx-large;
+    font-weight: 300;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.about3 p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(73, 73, 73);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.info2{
+    margin-left: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:65%;
+    width:90vw;
+    margin: 0px auto;
+}
+
+.room_card{
+    border-radius: 10px;
+    margin-top: 0;
+    margin-left: 3px;
+    height: auto;
+    width: 27vw;
+    display: flex;
+    flex-direction: column;
+    background-color:aliceblue;
+}
+.pic{
+    height: auto;
+    margin: 10px;
+}
+.pic img{
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+    border-radius: 10px;
+}
+.room_info{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 10px;
+   
+}
+.room_info ul{
+    padding-top: 0px;
+    padding-bottom: 1px;
+}
+.room_info h3{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.room_info p{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.room_price{
+    margin-top: 20px;
+    color: blue;
+    font-size: large;
+}
+
+
+        /* Footer */
+footer {
+    background:#2c3e50;
+    color: white;
+    padding: 60px 30px;
+}
+        
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+        
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+        
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: #0066cc;
+}
+        
+.footer-column ul {
+    list-style: none;
+}
+        
+.footer-column ul li {
+     margin-bottom: 10px;
+}
+        
+.footer-column ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+        
+.footer-column ul li a:hover {
+    color: #0066cc;
+}
+        
+.footer-column p {
+    color: #bbb;
+    margin-bottom: 20px;
+}
+        
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+        
+.social-icons a {
+    color: white;
+    background: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+        
+.social-icons a:hover {
+    background: #0066cc;
+    transform: translateY(-3px);
+}
+        
+.copyright {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #444;
+    color: #bbb;
+    font-size: 0.9rem;
+}
+
