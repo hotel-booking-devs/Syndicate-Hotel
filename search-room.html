@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syndicate Hotel Room Search</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .search-container {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 12px;
+      max-width: 900px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+    }
+
+    select, input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .results {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .stars {
+      color: gold;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏨 Syndicate Hotel Room Search</h1>
+  </header>
+
+  <div class="search-container">
+    <div class="filters">
+      <select id="roomType">
+        <option value="">All Room Types</option>
+        <option value="Standard">Standard</option>
+        <option value="Deluxe">Deluxe</option>
+        <option value="Suite">Suite</option>
+        <option value="Family">Family</option>
+      </select>
+
+      <select id="availability">
+        <option value="">All Availability</option>
+        <option value="1">Available</option>
+        <option value="0">Unavailable</option>
+      </select>
+
+      <select id="rating">
+        <option value="">All Ratings</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <input type="number" id="minPrice" placeholder="Min Price (R)" />
+      <input type="number" id="maxPrice" placeholder="Max Price (R)" />
+
+      <button id="searchBtn">Search</button>
+    </div>
+  </div>
+
+  <div class="results" id="results"></div>
+
+  <script>
+    async function loadRooms() {
+      const response = await fetch('syndicate_hotel_real_images.json');
+      const data = await response.json();
+      return data.hotel.rooms;
+    }
+
+    function showRooms(rooms) {
+      const container = document.getElementById('results');
+      container.innerHTML = '';
+
+      if (rooms.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">No rooms found 😢</p>';
+        return;
+      }
+
+      rooms.forEach(room => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${room.thumbnail}" alt="${room.type}">
+          <div class="card-content">
+            <h3>${room.type} Room (#${room.roomId})</h3>
+            <p class="price">R${room.priceZAR}</p>
+            <p>Availability: ${room.available ? '✅ Available' : '❌ Unavailable'}</p>
+            <p class="stars">${'★'.repeat(room.rating)}${'☆'.repeat(5 - room.rating)}</p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterRooms(rooms) {
+      const type = document.getElementById('roomType').value;
+      const availability = document.getElementById('availability').value;
+      const rating = document.getElementById('rating').value;
+      const minPrice = document.getElementById('minPrice').value;
+      const maxPrice = document.getElementById('maxPrice').value;
+
+      return rooms.filter(room => {
+        return (
+          (type === '' || room.type === type) &&
+          (availability === '' || room.available == availability) &&
+          (rating === '' || room.rating == rating) &&
+          (minPrice === '' || room.priceZAR >= parseInt(minPrice)) &&
+          (maxPrice === '' || room.priceZAR <= parseInt(maxPrice))
+        );
+      });
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', async () => {
+      const rooms = await loadRooms();
+      const filtered = filterRooms(rooms);
+      showRooms(filtered);
+    });
+
+    // Load all rooms initially
+    (async () => {
+      const rooms = await loadRooms();
+      showRooms(rooms);
+    })();
+  </script>
+</body>
+</html>
