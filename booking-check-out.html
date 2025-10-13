@@ -806,13 +806,110 @@
                     <textarea id="special-requests" rows="3"></textarea>
                 </div>
                 
-                <a type="submit" class="payment-btn" href="make-payment.html">
+                <a type="submit" class="payment-btn" href="make-payment.html?room=%7B%22roomId%22%3A%22009%22%2C%22thumbnail%22%3A%22https%3A%2F%2Fimages.unsplash.com%2Fphoto-1505691938895-1758d7feb511%3Fauto%3Dformat%26fit%3Dcrop%26w%3D400%26q%3D80%22%2C%22images%22%3A%5B%22https%3A%2F%2Fimages.unsplash.com%2Fphoto-1505691938895-1758d7feb511%3Fauto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80%22%2C%22https%3A%2F%2Fimages.pexels.com%2Fphotos%2F271624%2Fpexels-photo-271624.jpeg%3Fauto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80%22%2C%22https%3A%2F%2Fimages.pexels.com%2Fphotos%2F26139%2Fpexels-photo-26139.jpg%3Fauto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80%22%2C%22https%3A%2F%2Fimages.unsplash.com%2Fphoto-1551882547-ff40c63fe5fa%3Fauto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80%22%2C%22https%3A%2F%2Fimages.pexels.com%2Fphotos%2F1571460%2Fpexels-photo-1571460.jpeg%3Fauto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80%22%5D%2C%22priceZAR%22%3A518%2C%22available%22%3A1%2C%22type%22%3A%22Deluxe%22%2C%22rating%22%3A2%7D">
                     <i class="fas fa-lock"></i> Make Payment
                 </a>
             </form>
         </div>
 
     </div>
+
+    <script>
+
+    // booking-check-out.js
+    window.addEventListener('DOMContentLoaded', () => {
+    // Parse the room object from URL
+    const params = new URLSearchParams(window.location.search);
+    const roomDataEncoded = params.get('room');
+    if (!roomDataEncoded) return;
+
+    const room = JSON.parse(decodeURIComponent(roomDataEncoded));
+
+    // Main image
+    const mainImage = document.getElementById('main-image');
+    mainImage.src = room.thumbnail;
+
+    // Carousel thumbnails
+    const thumbnailsContainer = document.querySelector('.carousel-thumbnails');
+    thumbnailsContainer.innerHTML = ''; // clear default
+
+    room.images.forEach((imgUrl, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'carousel-thumb' + (index === 0 ? ' active' : '');
+        thumb.dataset.image = imgUrl;
+
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = `${room.type} Image ${index + 1}`;
+
+        thumb.appendChild(img);
+        thumbnailsContainer.appendChild(thumb);
+
+        // Thumbnail click event
+        thumb.addEventListener('click', () => {
+            mainImage.src = imgUrl;
+            document.querySelectorAll('.carousel-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        });
+    });
+
+    // Room info
+    document.querySelector('.room-title').textContent = room.type + ' Room';
+    document.querySelector('.room-price').innerHTML = `R${room.priceZAR} <span>/night</span>`;
+    document.querySelector('.room-description').textContent = room.description || 'No description available';
+
+    // Room features
+    const featuresContainer = document.querySelectorAll('.room-features')[0]; // first features div
+    featuresContainer.innerHTML = `
+        <div class="feature"><i class="fas fa-bed"></i><span>Standard bed</span></div>
+        <div class="feature"><i class="fas fa-wifi"></i><span>Free WiFi</span></div>
+        <div class="feature"><i class="fas fa-tv"></i><span>Smart TV</span></div>
+        <div class="feature"><i class="fas fa-coffee"></i><span>Coffee maker</span></div>
+        <div class="feature"><i class="fas fa-snowflake"></i><span>Air conditioning</span></div>
+    `;
+
+    // Amenities
+    const amenitiesContainer = document.querySelectorAll('.room-features')[1]; // second div
+    amenitiesContainer.innerHTML = `
+        <div class="feature"><i class="fas fa-shower"></i><span>Premium toiletries</span></div>
+        <div class="feature"><i class="fas fa-utensils"></i><span>Room service</span></div>
+        <div class="feature"><i class="fas fa-parking"></i><span>Free parking</span></div>
+        <div class="feature"><i class="fas fa-swimming-pool"></i><span>Pool access</span></div>
+        <div class="feature"><i class="fas fa-dumbbell"></i><span>Fitness center</span></div>
+        <div class="feature"><i class="fas fa-concierge-bell"></i><span>Concierge service</span></div>
+    `;
+});
+    let userdata ={
+          "names":"",
+          "email":"",
+        };
+     function getdata(){
+        fetch("http://localhost:3000/api/getuserdata",{
+            method:"POST",
+            header:{"Content-type":"application/json"},
+            body:JSON.stringify({
+                "data":"true"
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+             userdata.names = data.names;  
+             userdata.email = data.email;
+        })
+        .catch(error=>{
+            alert("error has occurred",error);
+        }
+        )
+     }
+     // Retrieve from localStorage
+const savedData = JSON.parse(localStorage.getItem("userdata"));
+
+// Use the data
+console.log(savedData.names);
+console.log(savedData.email);
+
+     alert(savedData.email);
+
+    </script>
 
     <script>
         // Image Carousel Functionality

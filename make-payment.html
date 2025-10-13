@@ -481,7 +481,7 @@
                 
                 <div class="summary-item">
                     <span class="item-label">Room Rate</span>
-                    <span class="item-value">R349/day</span>
+                    <span class="item-value">R518/day</span>
                 </div>
                 
                 <div class="summary-item">
@@ -491,7 +491,7 @@
                 
                 <div class="total">
                     <span>Total</span>
-                    <span>R366.25</span>
+                    <span>R535.25</span>
                 </div>
             </div>
             
@@ -538,8 +538,16 @@
                             <span>Your payment details are encrypted and secure</span>
                         </div>
                         
-                        <button type="submit" class="submit-payment">Pay Now - R366.25</button>
+                        <button type="submit" class="submit-payment">Pay Now - R535.25</button>
                     </form>
+
+                    <script>
+                        const payButton = document.querySelector('.submit-payment');
+                        payButton.onclick = () => {
+                            window.location.href = 'https://now.uhonemukondeleli.com/includes/send-proof-of-payment.php';
+                        };
+                    </script>
+
                 </div>
                 
                 <!-- PayPal Option -->

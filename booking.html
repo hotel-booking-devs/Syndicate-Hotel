@@ -567,6 +567,54 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            // Function to set search form values from URL
+            function setSearchFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+
+                const checkIn = params.get('checkin') || '';
+                const checkOut = params.get('checkout') || '';
+                const guests = params.get('guests') || '1';
+                const rooms = params.get('rooms') || '1';
+
+                document.getElementById('check-in').value = checkIn;
+                document.getElementById('check-out').value = checkOut;
+                document.getElementById('guests').value = guests + (guests === '1' ? ' Guest' : ' Guests');
+                document.getElementById('rooms').value = rooms + (rooms === '1' ? ' Room' : ' Rooms');
+            }
+
+            // Function to update URL when search button is clicked
+            function updateSearchUrl(e) {
+                e.preventDefault(); // prevent default form submission
+
+                const checkIn = document.getElementById('check-in').value;
+                const checkOut = document.getElementById('check-out').value;
+                const guests = document.getElementById('guests').value.split(' ')[0]; // extract number
+                const rooms = document.getElementById('rooms').value.split(' ')[0];   // extract number
+
+                const params = new URLSearchParams(window.location.search);
+
+                params.set('checkin', checkIn);
+                params.set('checkout', checkOut);
+                params.set('guests', guests);
+                params.set('rooms', rooms);
+
+                // Update URL without reloading the page
+                const newUrl = `${window.location.pathname}?${params.toString()}`;
+                window.history.replaceState({}, '', newUrl);
+            }
+
+            // Initialize search form on page load
+            window.addEventListener('DOMContentLoaded', setSearchFromUrl);
+
+            // Attach event listener to search button
+            const searchBtn = document.querySelector('.search-btn');
+            searchBtn.addEventListener('click', updateSearchUrl);
+        </script>
+
+
+
         
         
 
@@ -623,6 +671,47 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            // Function to set select values from URL
+            function setFiltersFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+
+                const price = params.get('price') || 'Any Price';
+                const roomType = params.get('roomType') || 'Any Room';
+                const amenities = params.get('amenities') || 'Any Amenities';
+                const rating = params.get('rating') || 'Any Rating';
+
+                document.getElementById('price-range').value = price;
+                document.getElementById('room-type').value = roomType;
+                document.getElementById('amenities').value = amenities;
+                document.getElementById('rating').value = rating;
+            }
+
+            // Function to update URL and refresh page
+            function updateFiltersInUrl() {
+                const params = new URLSearchParams(window.location.search);
+
+                params.set('price', document.getElementById('price-range').value);
+                params.set('roomType', document.getElementById('room-type').value);
+                params.set('amenities', document.getElementById('amenities').value);
+                params.set('rating', document.getElementById('rating').value);
+
+                // Refresh page with updated query parameters
+                window.location.search = params.toString();
+            }
+
+            // Set filters when page loads
+            window.addEventListener('DOMContentLoaded', setFiltersFromUrl);
+
+            // Attach change event to all filter selects
+            const filters = ['price-range', 'room-type', 'amenities', 'rating'];
+            filters.forEach(id => {
+                document.getElementById(id).addEventListener('change', updateFiltersInUrl);
+            });
+        </script>
+
+
         
         <!-- Results Section -->
         <section class="results">
@@ -647,203 +736,160 @@
             <!-- Rooms Grid -->
             <div class="rooms-grid">
                 <!-- Room 1 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Deluxe Room">
-                        <div class="room-badge">Popular</div>
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Deluxe King Room</h3>
-                        <p class="room-price">R599 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> King-size bed</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-coffee"></i> Coffee maker</li>
-                            <li><i class="fas fa-snowflake"></i> Air conditioning</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>4.5 (128 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
+                
                 
                 <!-- Room 2 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Executive Suite">
-                        <div class="room-badge">Best Value</div>
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Executive Suite</h3>
-                        <p class="room-price">R699 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> King-size bed</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-bath"></i> Luxury bathroom</li>
-                            <li><i class="fas fa-couch"></i> Separate living area</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>4.9 (87 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Room 3 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Presidential Suite">
-                        <div class="room-badge">Luxury</div>
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Presidential Suite</h3>
-                        <p class="room-price">R799 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> King-size bed</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-hot-tub"></i> Jacuzzi</li>
-                            <li><i class="fas fa-utensils"></i> Dining area</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>5.0 (42 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Room 4 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Standard Room">
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Standard Twin Room</h3>
-                        <p class="room-price">R349 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> Two double beds</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-coffee"></i> Coffee maker</li>
-                            <li><i class="fas fa-snowflake"></i> Air conditioning</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span>4.2 (203 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Room 5 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Family Room">
-                        <div class="room-badge">Family Friendly</div>
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Family Suite</h3>
-                        <p class="room-price">R549 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> King bed + bunk beds</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-gamepad"></i> Game console</li>
-                            <li><i class="fas fa-utensils"></i> Kitchenette</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>4.7 (96 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Room 6 -->
-                <div class="room-card">
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Ocean View Room">
-                        <div class="room-badge">Ocean View</div>
-                    </div>
-                    
-                    <div class="room-content">
-                        <h3 class="room-title">Ocean View Room</h3>
-                        <p class="room-price">R1989 <span>/ day</span></p>
-                        
-                        <ul class="room-features">
-                            <li><i class="fas fa-bed"></i> King-size bed</li>
-                            <li><i class="fas fa-wifi"></i> Free WiFi</li>
-                            <li><i class="fas fa-tv"></i> Smart TV</li>
-                            <li><i class="fas fa-umbrella-beach"></i> Beach access</li>
-                            <li><i class="fas fa-wind"></i> Ocean view balcony</li>
-                        </ul>
-                        
-                        <div class="room-actions">
-                            <div class="room-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>4.8 (112 reviews)</span>
-                            </div>
-                            <a href="/booking-check-out.html" class="btn btn-outline">Book Room</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
+
+        <script>
+    let hotelData = null;
+
+    // Load JSON data
+    async function loadHotelData() {
+        const response = await fetch('syndicate_hotel_real_images.json');
+        hotelData = await response.json();
+    }
+
+    // Utility: Get URL params
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            checkin: params.get('checkin') || '',
+            checkout: params.get('checkout') || '',
+            guests: params.get('guests') || '',
+            rooms: params.get('rooms') || '',
+            price: params.get('price') || 'Any Price',
+            roomType: params.get('roomType') || 'Any Room',
+            amenities: params.get('amenities') || 'Any Amenities',
+            rating: params.get('rating') || 'Any Rating'
+        };
+    }
+
+    // Filter rooms based on URL parameters
+    function filterRooms() {
+        const params = getUrlParams();
+        if (!hotelData) return [];
+
+        return hotelData.hotel.rooms.filter(room => {
+            // Filter by Room Type
+            if (params.roomType !== 'Any Room' && room.type !== params.roomType) return false;
+
+            // Filter by Rating
+            if (params.rating !== 'Any Rating' && room.rating < parseInt(params.rating)) return false;
+
+            // Filter by Price
+            if (params.price !== 'Any Price') {
+                const price = room.priceZAR;
+                switch(params.price) {
+                    case 'Under R500': if(price >= 500) return false; break;
+                    case 'R500 - R1000': if(price < 500 || price > 1000) return false; break;
+                    case 'R1000 - R1500': if(price < 1000 || price > 1500) return false; break;
+                    case 'Over R1500': if(price <= 1500) return false; break;
+                }
+            }
+
+            // TODO: Filter by Amenities if needed
+
+            return true;
+        });
+    }
+
+    // Render rooms in .rooms-grid
+    function renderRooms(rooms) {
+        const grid = document.querySelector('.rooms-grid');
+        grid.innerHTML = ''; // Clear existing rooms
+
+        if (rooms.length === 0) {
+            grid.innerHTML = '<p>No rooms match your search criteria.</p>';
+            return;
+        }
+
+       rooms.forEach(room => {
+    const card = document.createElement('div');
+    card.className = 'room-card';
+
+    // Encode the room object as a URL parameter
+    const roomDataEncoded = encodeURIComponent(JSON.stringify(room));
+
+    card.innerHTML = `
+        <div class="room-image">
+            <img src="${room.thumbnail}" alt="${room.type} Room">
+            ${room.rating >= 4 ? '<div class="room-badge">Popular</div>' : ''}
+        </div>
+        
+        <div class="room-content">
+            <h3 class="room-title">${room.type} Room</h3>
+            <p class="room-price">R${room.priceZAR} <span>/ day</span></p>
+            
+            <ul class="room-features">
+                <li><i class="fas fa-bed"></i> Standard bed</li>
+                <li><i class="fas fa-wifi"></i> Free WiFi</li>
+                <li><i class="fas fa-tv"></i> Smart TV</li>
+                <li><i class="fas fa-coffee"></i> Coffee maker</li>
+                <li><i class="fas fa-snowflake"></i> Air conditioning</li>
+            </ul>
+            
+            <div class="room-actions">
+                <div class="room-rating">
+                    ${'<i class="fas fa-star"></i>'.repeat(room.rating)}
+                    <span>${room.rating} Stars</span>
+                </div>
+                <a href="/booking-check-out.html?room=${roomDataEncoded}" class="btn btn-outline">Book Room</a>
+            </div>
+        </div>
+    `;
+
+    grid.appendChild(card);
+});
+
+
+
+    }
+
+    // Run search based on URL
+    async function runSearch() {
+        if (!hotelData) await loadHotelData();
+        const rooms = filterRooms();
+        renderRooms(rooms);
+    }
+
+    // Initialize search on page load
+    window.addEventListener('DOMContentLoaded', runSearch);
+
+    // Trigger search when Search button is clicked
+    document.querySelector('.search-btn').addEventListener('click', () => {
+        // Update URL first
+        const checkIn = document.getElementById('check-in').value;
+        const checkOut = document.getElementById('check-out').value;
+        const guests = document.getElementById('guests').value.split(' ')[0];
+        const rooms = document.getElementById('rooms').value.split(' ')[0];
+
+        const params = new URLSearchParams(window.location.search);
+        params.set('checkin', checkIn);
+        params.set('checkout', checkOut);
+        params.set('guests', guests);
+        params.set('rooms', rooms);
+
+        // Update URL without reload
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.replaceState({}, '', newUrl);
+
+        // Run search after updating URL
+        runSearch();
+
+    });
+</script>
+
+
     </div>
 </div>
     <!-- Footer -->
@@ -921,6 +967,45 @@
             alert('Searching for hotels...');
             // In a real application, this would send the search request to a server
         });
+        function searchrooms() {
+             const roomType = document.getElementById("room_type").value; // Make sure your input/select has id="room_type"
+
+              fetch("/api/search_rooms", {
+                   method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ room_type: roomType })
+               })
+               .then(res => res.json())
+               .then(data => {
+                const container = document.getElementById('results');
+                container.innerHTML = '';
+
+                if (!data.rooms || data.rooms.length === 0) {
+                   container.innerHTML = '<p style="text-align:center;">No rooms found 😢</p>';
+                   return;
+                }
+                data.rooms.forEach(room => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                   <img src="${room.thumbnail}" alt="${room.type}">
+                   <div class="card-content">
+                       <h3>${room.type} Room (#${room.roomId})</h3>
+                       <p class="price">R${room.priceZAR}</p>
+                       <p>Availability: ${room.available ? '✅ Available' : '❌ Unavailable'}</p>
+                       <p class="stars">${'★'.repeat(room.rating)}${'☆'.repeat(5 - room.rating)}</p>
+                   </div>
+                 `;
+                 container.appendChild(card);
+                });
+                })
+                .catch(error => {
+                     console.error(error);
+                    alert("Error has occurred, try again later.");
+                });
+                
+        }
+
     </script>
 
 </body>

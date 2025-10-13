@@ -449,11 +449,11 @@
         <div class="sidebar">
             <ul class="sidebar-menu">
                 <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-calendar-alt"></i> My Bookings</a></li>
+                <li><a href="'booking.html'"><i class="fas fa-calendar-alt"></i>Book Now</a></li>
                 <li><a href="#"><i class="fas fa-credit-card"></i> Payments</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
                 <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
-                <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             </ul>
         </div>
 
@@ -461,7 +461,7 @@
         <div class="main-content">
             <!-- Welcome Banner -->
             <div class="welcome-banner">
-                <h1>Welcome back, John!</h1>
+                <h1>Welcome back, Uhone!</h1>
                 <p>We're glad to see you again. Here's what's happening with your bookings.</p>
             </div>
 
@@ -623,9 +623,13 @@
             
             // Set user's first initial and last initial for avatar
             const userAvatar = document.querySelector('.user-avatar');
-            const userName = "John Smith"; // This would come from your authentication system
+            const userName = "Uhone Mukondeleli"; // This would come from your authentication system
             const initials = userName.split(' ').map(name => name[0]).join('');
             userAvatar.textContent = initials;
+            //logout 
+            function logout(){
+                    window.location.href="login.html";
+            }
             
             // Active class to clicked sidebar items
             const sidebarItems = document.querySelectorAll('.sidebar-menu a');
